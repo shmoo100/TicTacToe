@@ -1,4 +1,7 @@
 from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 from matplotlib import pyplot as plt
 import csv
 
