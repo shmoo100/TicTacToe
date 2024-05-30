@@ -23,5 +23,6 @@ for i in range(16):
 for i in range(16):
     print( "i=",i," Ziffer=",trainY[i])
 # Zeige die ersten 16 Bilder
-plt.show()
 print(type(trainY))
+plt.show()
+
