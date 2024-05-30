@@ -6,7 +6,11 @@ def getCSVtoList(file):
     return output
 
 
-boards = getCSVtoList('data_test.txt')
+boards = getCSVtoList('data_test_minmax.txt')
+
+moves = []
 
 for i in boards:
-    print(i)
+    moves.append(i[0])
+
+print(moves)

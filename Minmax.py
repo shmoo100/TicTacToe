@@ -131,7 +131,6 @@ if __name__ == "__main__":
         best_move = get_best_move_for_current_state(board, current_player)
         numberBM = best_move[0]*3 + best_move[1]
         print(numberBM)
-        feld = k
-        feld.append(numberBM)
-        collect_data('data_test_minmax.txt', feld)
+        li = [numberBM]
+        collect_data('data_test_minmax.txt', li)
 

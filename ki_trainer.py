@@ -1,28 +1,18 @@
-# Die Daten sind als mnist in tensorflow gespeichert.
-# mnist muss daher importiert werden.
 from tensorflow.keras.datasets import mnist
-
-# zum Darstellen der Daten wird matplotlib verwendet
 from matplotlib import pyplot as plt
+import csv
 
-# Datenset wird geladen. Trainings- und Testdaten werden aufgeteilt.
-(trainX, trainY), (testX, testY) = mnist.load_data()
+def getCSVtoList(file):
+    with open(file,'r') as f:
+        output=list(csv.reader(f,quoting=csv.QUOTE_NONNUMERIC))
+    return output
 
-# Zusammenfassung des geladenen Datensets
-print('Train: X=%s, y=%s' % (trainX.shape, trainY.shape))
-print('Test: X=%s, y=%s' % (testX.shape, testY.shape))
+trainX = getCSVtoList('data_test.txt')
+trainY = []
 
-#plotte die ersten 16 Bilder
-for i in range(16):
-    # Erstelle die Subplots. Pro Bild muss ein Subplot erstellt werden
-    plt.subplot(4,4,i+1)
-    # Zeige die Bilder in schwarz-weiss.
-    plt.imshow(trainX[i], cmap=plt.get_cmap('gray'))
+k = getCSVtoList('data_test_minmax.txt')
+for i in k:
+    trainY.append(i[0])
 
-# Gib die Labels der dargestellten Bilder aus.
-for i in range(16):
-    print( "i=",i," Ziffer=",trainY[i])
-# Zeige die ersten 16 Bilder
-print(type(trainY))
-plt.show()
-
+print(trainX)
+print(trainY)
