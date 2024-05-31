@@ -37,7 +37,7 @@ for i in range(0, 2):
 
     while winner == 0 and turn != 10:
 
-        collect_data('data_test.txt', feld)
+        collect_data('board_states.txt', feld)
 
         if len(inputs) > 1:
             playerIn = inputs[randint(0, len(inputs)-1)]

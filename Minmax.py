@@ -99,7 +99,7 @@ def get_best_move_for_current_state(board, current_player):
 # Example usage
 if __name__ == "__main__":
 
-    boards = getCSVtoList('data_test.txt')
+    boards = getCSVtoList('board_states.txt')
 
     for k in boards:
         feld = list(k)
@@ -132,5 +132,5 @@ if __name__ == "__main__":
         numberBM = best_move[0]*3 + best_move[1]
         print(numberBM)
         li = [numberBM]
-        collect_data('data_test_minmax.txt', li)
+        collect_data('best_move.txt', li)
 
