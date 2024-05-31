@@ -100,6 +100,7 @@ def get_best_move_for_current_state(board, current_player):
 if __name__ == "__main__":
 
     boards = getCSVtoList('board_states.txt')
+    boards_done = 0
 
     for k in boards:
         feld = list(k)
@@ -122,15 +123,25 @@ if __name__ == "__main__":
                 feld[i] = 'X'
 
 
-        board = [
-            [feld[0], feld[1], feld[2]],
-            [feld[3], feld[4], feld[5]],
-            [feld[6], feld[7], feld[8]]
-        ]
+        if feld.count(0) == 9:
+            numberBM = 0
+        else:
 
-        best_move = get_best_move_for_current_state(board, current_player)
-        numberBM = best_move[0]*3 + best_move[1]
-        print(numberBM)
+            board = [
+                [feld[0], feld[1], feld[2]],
+                [feld[3], feld[4], feld[5]],
+                [feld[6], feld[7], feld[8]]
+            ]
+
+
+            best_move = get_best_move_for_current_state(board, current_player)
+            numberBM = best_move[0]*3 + best_move[1]
+
         li = [numberBM]
+        boards_done += 1
+
+        if boards_done % 50 == 0:
+            print(boards_done)
+
         collect_data('best_move.txt', li)
 
