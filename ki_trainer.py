@@ -30,6 +30,8 @@ for i in k:
     liY.append(i[0])
 
 
+
+
 mid_indexX = len(liX) // 2
 mid_indexY = len(liY) // 2
 
@@ -47,7 +49,7 @@ testY = to_categorical(testY)
 model = nn_model()
 model.summary()
 
-history = model.fit(trainX, trainY, epochs=100, batch_size=100, verbose=1)
+history = model.fit(trainX, trainY, epochs=200, batch_size=100, verbose=1)
 model.save('model_tictactoe_tanh.keras')
 
 

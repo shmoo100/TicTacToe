@@ -25,7 +25,7 @@ def print_board(board):
         print('-' * 5)
 
 
-def korrektur(feld):
+def check(feld):
 
     x = 0
     for i in range(0, 3):
@@ -81,7 +81,7 @@ while winner == 0 and turn != 10:
 
     board[playerIn] = player
 
-    winner = korrektur(board)
+    winner = check(board)
     turn += 1
     player = player*-1
 
