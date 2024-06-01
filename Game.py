@@ -1,4 +1,14 @@
-feld = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+import keras.models
+import numpy as np
+
+
+def getMoveAI(model, board):
+    inArray = np.array(board)
+    inArray = inArray.reshape(1, 9)
+    pred = list(model.predict(inArray))
+
+    return pred
+
 
 def korrektur(feld):
 
@@ -20,25 +30,41 @@ def korrektur(feld):
     return x
 
 
+board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 winner = 0
 player = 1
 turn = 1
+model = keras.models.load_model('model_trained_script.keras')
+AiPlayer = int(input("Soll AI beginnen?"))
 
 
 while winner == 0 and turn != 10:
 
     for i in range(0, 3):
-        print(str(feld[3 * i]) + "|" + str(feld[3 * i + 1]) + "|" + str(feld[3 * i + 2]))
+        print(str(board[3 * i]) + "|" + str(board[3 * i + 1]) + "|" + str(board[3 * i + 2]))
 
-    playerIn = int(input("Gib eine leeres Feld ein"))-1
-    print(playerIn)
+    if player == AiPlayer:
+        AiReturn = getMoveAI(model, board)
+        AiReturn = AiReturn[0].tolist()
+        max_value = max(AiReturn)
+        playerIn = AiReturn.index(max_value)
+        if board[playerIn] != 0:
+            print("illegal move by AI")
+            print(playerIn)
+            print(AiReturn)
+            break
+    else:
 
-    while feld[playerIn] != 0 or playerIn < 0:
-        player = int(input("Gib eine leeres Feld ein"))-1
+        playerIn = int(input("Gib eine leeres Feld ein"))-1
 
-    feld[playerIn] = player
+        while board[playerIn] != 0 or playerIn < 0:
+            player = int(input("Gib eine leeres Feld ein"))-1
 
-    winner = korrektur(feld)
+
+    board[playerIn] = player
+
+    winner = korrektur(board)
     turn += 1
     player = (player % 2) + 1
 

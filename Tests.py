@@ -1,14 +1,21 @@
+import keras.models
 import numpy as np
 
-li = [[1, 2], [2, 3]]
 
-mid_index = len(li) // 2
+def getMoveAI(model, board):
+    inArray = np.array(board)
+    inArray = inArray.reshape(1, 9)
+    pred = list(model.predict(inArray))
 
-li2 = li[mid_index:]
-li = li[:mid_index]
+    return pred
 
-li = np.array(li)
+model=keras.models.load_model('model_trained_script.keras')
+board=[0, 0, 0, 0, 0, 0, 0, 0, 0]
+AIReturn = getMoveAI(model, board)
 
-
-print(li)
-print(li2)
+print(AIReturn)
+max_value = max(AIReturn[0])
+print(max_value)
+AiValues = AIReturn[0].tolist()
+AiMove = AiValues.index(max_value)
+print(AiMove)

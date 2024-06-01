@@ -88,7 +88,7 @@ def get_best_move_for_current_state(board, current_player):
 # Example usage
 if __name__ == "__main__":
 
-    feld = [0,-1,0,0,-1,0,1,0,1]
+    feld = [1, 1, -1 , 0,-1, 0, 0, 0, 0]
 
     if (feld.count(1) == feld.count(-1)):
         current_player = 'O'
