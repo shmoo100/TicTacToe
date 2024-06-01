@@ -33,8 +33,8 @@ mid_indexY = len(liY) // 2
 testX = np.array(liX[mid_indexX:])
 testY = np.array(liY[mid_indexY:])
 
-trainX = np.array(liX[:mid_indexX])
-trainY = np.array(liY[:mid_indexY])
+trainX = np.array(liX)
+trainY = np.array(liY)
 
 
 
@@ -44,11 +44,9 @@ testY = to_categorical(testY)
 model = nn_model()
 model.summary()
 
-history = model.fit(trainX, trainY, epochs=1000, batch_size=50, verbose=1)
+history = model.fit(trainX, trainY, epochs=5000, batch_size=100, verbose=1)
 model.save('model_trained_script.keras')
-scores = model.evaluate(testX, testY, verbose=1)
-print("Baseline Accuracy: %.2f%%" % (scores[1] * 100))
-print("Baseline Loss: %.2f%%" % (scores[0] * 100))
+
 
 
 # Modell evaluieren

@@ -50,16 +50,34 @@ while winner == 0 and turn != 10:
         max_value = max(AiReturn)
         playerIn = AiReturn.index(max_value)
         if board[playerIn] != 0:
-            print("illegal move by AI")
-            print(playerIn)
-            print(AiReturn)
-            break
+            board2 = [board[2], board[5], board[8], board[1], board[4], board[7], board[0], board[3], board[6] ]
+
+            AiReturn = getMoveAI(model, board2)
+            AiReturn = AiReturn[0].tolist()
+            max_value = max(AiReturn)
+            playerIn = AiReturn.index(max_value)
+
+            if playerIn < 3:
+                playerIn = playerIn % 3 + 2
+            elif playerIn >= 3 and playerIn < 6:
+                playerIn = playerIn % 3 + 1
+            else:
+                playerIn = playerIn % 3
+
+
+            if board[playerIn] != 0:
+                print("illegal move by AI")
+                print(playerIn)
+                print(AiReturn)
+                break
+
+
     else:
 
         playerIn = int(input("Gib eine leeres Feld ein"))-1
 
         while board[playerIn] != 0 or playerIn < 0:
-            player = int(input("Gib eine leeres Feld ein"))-1
+            playerIn = int(input("Gib eine leeres Feld ein"))-1
 
 
     board[playerIn] = player
