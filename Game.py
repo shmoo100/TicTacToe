@@ -35,7 +35,7 @@ board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 winner = 0
 player = 1
 turn = 1
-model = keras.models.load_model('model_trained_script.keras')
+model = keras.models.load_model('model_tictactoe.keras')
 AiPlayer = int(input("Soll AI beginnen?"))
 
 
@@ -44,32 +44,17 @@ while winner == 0 and turn != 10:
     for i in range(0, 3):
         print(str(board[3 * i]) + "|" + str(board[3 * i + 1]) + "|" + str(board[3 * i + 2]))
 
-    if player == AiPlayer:
+    if player == AiPlayer or 3 == AiPlayer:
         AiReturn = getMoveAI(model, board)
         AiReturn = AiReturn[0].tolist()
         max_value = max(AiReturn)
         playerIn = AiReturn.index(max_value)
         if board[playerIn] != 0:
-            board2 = [board[2], board[5], board[8], board[1], board[4], board[7], board[0], board[3], board[6] ]
 
-            AiReturn = getMoveAI(model, board2)
-            AiReturn = AiReturn[0].tolist()
-            max_value = max(AiReturn)
-            playerIn = AiReturn.index(max_value)
-
-            if playerIn < 3:
-                playerIn = playerIn % 3 + 2
-            elif playerIn >= 3 and playerIn < 6:
-                playerIn = playerIn % 3 + 1
-            else:
-                playerIn = playerIn % 3
-
-
-            if board[playerIn] != 0:
-                print("illegal move by AI")
-                print(playerIn)
-                print(AiReturn)
-                break
+            print("illegal move by AI")
+            print(playerIn)
+            print(AiReturn)
+            break
 
 
     else:
