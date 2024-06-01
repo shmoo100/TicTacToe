@@ -1,8 +1,14 @@
 import numpy as np
 
-list_of_lists = [[1, 2, 3], [4, 5, 6]]
-print(len(list_of_lists))
-inArray = np.array(list_of_lists)
+li = [[1, 2], [2, 3]]
 
-print(list_of_lists)
-print(inArray)
+mid_index = len(li) // 2
+
+li2 = li[mid_index:]
+li = li[:mid_index]
+
+li = np.array(li)
+
+
+print(li)
+print(li2)
