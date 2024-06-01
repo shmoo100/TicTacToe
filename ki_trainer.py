@@ -44,7 +44,7 @@ testY = to_categorical(testY)
 model = nn_model()
 model.summary()
 
-history = model.fit(trainX, trainY, epochs=1000, batch_size=100, verbose=1)
+history = model.fit(trainX, trainY, epochs=1000, batch_size=50, verbose=1)
 model.save('model_trained_script.keras')
 scores = model.evaluate(testX, testY, verbose=1)
 print("Baseline Accuracy: %.2f%%" % (scores[1] * 100))
