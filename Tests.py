@@ -12,7 +12,10 @@ def getCSVtoList(file):
     return output
 
 
-k = getCSVtoList('data_best_move_1.txt')
-y = k[0]
+k = getCSVtoList('best_move.txt')
+y = []
+for i in k:
+    y.append(i[0])
 
-print(y[717])
+
+print(y)

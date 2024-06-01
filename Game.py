@@ -9,6 +9,21 @@ def getMoveAI(model, board):
 
     return pred
 
+def print_board(board):
+
+    board2 = list(board)
+    for j in range(0, 9):
+        if board2[j] == 1:
+            board2[j] = "0"
+        elif board2[j] == -1:
+            board2[j] = "X"
+        else:
+            board2[j] = " "
+
+    for i in range(0, 3):
+        print(str(board2[3 * i]) + "|" + str(board2[3 * i + 1]) + "|" + str(board2[3 * i + 2]))
+        print('-' * 5)
+
 
 def korrektur(feld):
 
@@ -35,14 +50,13 @@ board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 winner = 0
 player = 1
 turn = 1
-model = keras.models.load_model('model_tictactoe.keras')
+model = keras.models.load_model('model_tictactoe_tanh.keras')
 AiPlayer = int(input("Soll AI beginnen?"))
 
 
 while winner == 0 and turn != 10:
 
-    for i in range(0, 3):
-        print(str(board[3 * i]) + "|" + str(board[3 * i + 1]) + "|" + str(board[3 * i + 2]))
+    print_board(board)
 
     if player == AiPlayer or 3 == AiPlayer:
         AiReturn = getMoveAI(model, board)
@@ -69,10 +83,18 @@ while winner == 0 and turn != 10:
 
     winner = korrektur(board)
     turn += 1
-    player = (player % 2) + 1
+    player = player*-1
 
 
-print(winner)
+print_board(board)
+
+
+if winner == 1:
+    print("O won")
+elif winner == -1:
+    print("X won")
+else:
+    print("tie")
 
 
 

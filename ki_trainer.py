@@ -12,8 +12,8 @@ def getCSVtoList(file):
 
 def nn_model():
     model=Sequential()
-    model.add(Dense(128, input_shape=(9,), kernel_initializer='normal',activation='relu'))
-    model.add(Dense(64, kernel_initializer='normal', activation='relu'))
+    model.add(Dense(729, input_shape=(9,), kernel_initializer='normal',activation='tanh'))
+    model.add(Dense(81, kernel_initializer='normal', activation='tanh'))
     model.add(Dense(9,kernel_initializer='normal', activation='softmax'))
     model.compile(loss='categorical_crossentropy',optimizer='adam', metrics=['accuracy'])
     return model
@@ -21,10 +21,13 @@ def nn_model():
 
 
 
-liX = getCSVtoList('board_states2.txt')
+liX = getCSVtoList('board_states.txt')
 
-k = getCSVtoList('data_best_move_1.txt')
-liY = k[0]
+k = getCSVtoList('best_move.txt')
+liY = []
+
+for i in k:
+    liY.append(i[0])
 
 
 mid_indexX = len(liX) // 2
@@ -44,8 +47,8 @@ testY = to_categorical(testY)
 model = nn_model()
 model.summary()
 
-history = model.fit(trainX, trainY, epochs=100, batch_size=200, verbose=1)
-model.save('model_tictactoe.keras')
+history = model.fit(trainX, trainY, epochs=100, batch_size=100, verbose=1)
+model.save('model_tictactoe_tanh.keras')
 
 
 
