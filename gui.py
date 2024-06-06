@@ -98,7 +98,7 @@ player = 1
 turn = 1
 
 # Load the AI model
-model = keras.models.load_model('model_tictactoe.keras')
+model = keras.models.load_model('model_tictactoe_end.keras')
 
 # Initialize Tkinter GUI
 root = tk.Tk()

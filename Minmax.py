@@ -99,7 +99,7 @@ def get_best_move_for_current_state(board, current_player):
 # Example usage
 if __name__ == "__main__":
 
-    boards = getCSVtoList('board_states.txt')
+    boards = getCSVtoList('possible_states.txt')
     boards_number = len(boards)
     boards_done = 0
 
@@ -146,5 +146,5 @@ if __name__ == "__main__":
 
             print(str(100*prozent) + "%")
 
-        collect_data('best_move.txt', li)
+        collect_data('possible_states_moves.txt', li)
 
