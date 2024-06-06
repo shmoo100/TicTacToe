@@ -11,37 +11,41 @@ def collect_data(file,data):
         writer.writerow(data)
 
 
+def check_for_winner(board):
 
-def is_winner(board, player):
-    win_conditions = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],  # rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],  # columns
-        [0, 4, 8], [2, 4, 6]  # diagonals
-    ]
-    for condition in win_conditions:
-        if all(board[i] == player for i in condition):
-            return True
-    return False
+    x = 0
+    for i in range(0, 3):
+        if board[3 * i] == board[3 * i + 1] and board[3 * i + 1] == board[3 * i + 2] and board[3 * i] != 0:
+            x = board[3 * i]
 
+    for i in range(0, 3):
+        if board[i] == board[i + 3] and board[i + 3] == board[i + 6] and board[i] != 0:
+            x = board[i]
 
-def is_draw(board):
-    return all(cell != 0 for cell in board)
+    if board[0] == board[4] and board[4] == board[8] and board[0] != 0:
+        x = board[0]
 
+    if board[2] == board[4] and board[4] == board[6] and board[4] != 0:
+        x = board[4]
 
-def minimax(board, depth, is_maximizing):
-    if is_winner(board, 1):
-        return 10 - depth
-    if is_winner(board, -1):
-        return depth - 10
-    if is_draw(board):
+    return x
+
+def minmax(board, depth, player):
+
+    winner = check_for_winner(board)
+    if winner == 1:
+        return 10-depth
+    elif winner == -1:
+        return depth-10
+    elif winner == 0 and board.count(0) == 0:
         return 0
 
-    if is_maximizing:
+    if player == 1:
         best_score = -float('inf')
         for i in range(9):
             if board[i] == 0:
                 board[i] = 1
-                score = minimax(board, depth + 1, False)
+                score = minmax(board, depth + 1, -1)
                 board[i] = 0
                 best_score = max(best_score, score)
         return best_score
@@ -50,24 +54,33 @@ def minimax(board, depth, is_maximizing):
         for i in range(9):
             if board[i] == 0:
                 board[i] = -1
-                score = minimax(board, depth + 1, True)
+                score = minmax(board, depth + 1, 1)
                 board[i] = 0
                 best_score = min(best_score, score)
         return best_score
 
-
-def find_best_move(board):
+def find_best_move(board, player, turn):
     best_move = -1
-    best_score = -float('inf')
+    if player == 1:
+        best_score = -float('inf')
+    elif player == -1:
+        best_score = float('inf')
+
     for i in range(9):
         if board[i] == 0:
-            board[i] = 1
-            score = minimax(board, 0, False)
+            board[i] = player
+            score = minmax(board, turn, -player)
             board[i] = 0
-            if score > best_score:
+
+            if player == 1 and score > best_score:
                 best_score = score
                 best_move = i
+            elif player == -1 and score < best_score:
+                best_score = score
+                best_move = i
+
     return best_move
+
 
 
 
@@ -76,7 +89,14 @@ boards_number = len(boards)
 boards_done = 0
 
 for k in boards:
-    best_move = find_best_move(k)
+
+    if k.count(1) == k.count(-1):
+        player = 1
+    else:
+        player = -1
+
+    turn = k.count(1) + k.count(-1)
+    best_move = find_best_move(k, player, turn)
     li = [best_move]
     collect_data('possible_states_moves.txt', li)
 
@@ -84,3 +104,4 @@ for k in boards:
 
     if boards_done % 50 == 0:
         print(str(boards_done/boards_number))
+

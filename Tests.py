@@ -48,7 +48,7 @@ def minmax(board, depth, player):
                 score = minmax(board, depth + 1, -1)
                 board[i] = 0
                 best_score = max(best_score, score)
-            return best_score
+        return best_score
     else:
         best_score = float('inf')
         for i in range(9):
@@ -57,7 +57,7 @@ def minmax(board, depth, player):
                 score = minmax(board, depth + 1, 1)
                 board[i] = 0
                 best_score = min(best_score, score)
-            return best_score
+        return best_score
 
 def find_best_move(board, player, turn):
     best_move = -1
@@ -84,12 +84,24 @@ def find_best_move(board, player, turn):
 
 
 
-board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-if board.count(1) == board.count(-1):
-    player = 1
-else:
-    player = -1
+boards = getCSVtoList('possible_states.txt')
+boards_number = len(boards)
+boards_done = 0
 
-turn = board.count(1) + board.count(-1)
+for k in boards:
 
-print(find_best_move(board, player, turn))
+    if k.count(1) == k.count(-1):
+        player = 1
+    else:
+        player = -1
+
+    turn = k.count(1) + k.count(-1)
+    best_move = find_best_move(k, player, turn)
+    li = [best_move]
+    collect_data('possible_states_moves.txt', li)
+
+    boards_done += 1
+
+    if boards_done % 50 == 0:
+        print(str(boards_done/boards_number))
+
