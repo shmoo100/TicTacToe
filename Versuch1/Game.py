@@ -51,14 +51,17 @@ winner = 0
 player = 1
 turn = 1
 model = keras.models.load_model('model_tictactoe_tanh.keras')
-AiPlayer = int(input("Soll AI beginnen?"))
+AiPlayer = int(input("Soll AI beginnen ? (1 = Ja / -1 = Nein)"))
+while AiPlayer != 1 and AiPlayer != -1:
+    AiPlayer = int(input("Soll AI beginnen ? (1 = Ja / -1 = Nein)"))
+
 
 
 while winner == 0 and turn != 10:
 
     print_board(board)
 
-    if player == AiPlayer or 3 == AiPlayer:
+    if player == AiPlayer:
         AiReturn = getMoveAI(model, board)
         AiReturn = AiReturn[0].tolist()
         max_value = max(AiReturn)
@@ -73,10 +76,10 @@ while winner == 0 and turn != 10:
 
     else:
 
-        playerIn = int(input("Gib eine leeres Feld ein"))-1
+        playerIn = int(input("Gib ein leeres Feld ein (1-9)"))-1
 
         while board[playerIn] != 0 or playerIn < 0:
-            playerIn = int(input("Gib eine leeres Feld ein"))-1
+            playerIn = int(input("Gib ein leeres Feld ein (1-9"))-1
 
 
     board[playerIn] = player

@@ -21,10 +21,10 @@ def nn_model():
 
 
 
-liX = getCSVtoList('possible_states.txt')
+liX = getCSVtoList('board_states.txt')
 
 
-k = getCSVtoList('possible_states_moves.txt')
+k = getCSVtoList('best_move.txt')
 liY = []
 
 
@@ -32,26 +32,17 @@ for i in k:
     liY.append(i[0])
 
 
-
-mid_indexX = len(liX) // 2
-mid_indexY = len(liY) // 2
-
-testX = np.array(liX[mid_indexX:])
-testY = np.array(liY[mid_indexY:])
-
 trainX = np.array(liX)
 trainY = np.array(liY)
 
 
-
 trainY = to_categorical(trainY)
-testY = to_categorical(testY)
 
 model = nn_model()
 model.summary()
 
-history = model.fit(trainX, trainY, epochs=250, batch_size=50, verbose=1)
-model.save('model_tictactoe_end.keras')
+history = model.fit(trainX, trainY, epochs=100, batch_size=200, verbose=1)
+model.save('model_tictactoe_tanh.keras')
 
 
 
