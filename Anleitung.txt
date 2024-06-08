@@ -1,0 +1,13 @@
+Kurzer Überblick über das Repository
+
+Versuch1 sind alle Programme und Dateien, die ich für die KI mit zufälligen Games und schlechten Minimax gebraucht habe.
+Versuch2 sind alle Programme und Dateien, die ich für die KI mit allen möglichen Boards und eigenen Minimax gebraucht habe.
+
+Bei Game kann man gegen die KI spielen; man muss zuerst eingeben, ob die KI als erster(Eingabe = 1) oder zweiter (Eingabe = -1) spielen soll.
+Danach kann man freie Felder 1-9 eingeben.
+
+1|2|3
+-----
+4|5|6
+-----
+7|8|9

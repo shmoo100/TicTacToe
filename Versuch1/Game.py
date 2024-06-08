@@ -22,7 +22,8 @@ def print_board(board):
 
     for i in range(0, 3):
         print(str(board2[3 * i]) + "|" + str(board2[3 * i + 1]) + "|" + str(board2[3 * i + 2]))
-        print('-' * 5)
+        if i / 2 != 1:
+            print('-' * 5)
 
 
 def check(feld):

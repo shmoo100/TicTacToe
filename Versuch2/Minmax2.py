@@ -30,7 +30,7 @@ def check_for_winner(board):
 
     return x
 
-def minmax(board, depth, player):
+def minimax(board, depth, player):
 
     winner = check_for_winner(board)
     if winner == 1:
@@ -45,7 +45,7 @@ def minmax(board, depth, player):
         for i in range(9):
             if board[i] == 0:
                 board[i] = 1
-                score = minmax(board, depth + 1, -1)
+                score = minimax(board, depth + 1, -1)
                 board[i] = 0
                 best_score = max(best_score, score)
         return best_score
@@ -54,7 +54,7 @@ def minmax(board, depth, player):
         for i in range(9):
             if board[i] == 0:
                 board[i] = -1
-                score = minmax(board, depth + 1, 1)
+                score = minimax(board, depth + 1, 1)
                 board[i] = 0
                 best_score = min(best_score, score)
         return best_score
@@ -69,7 +69,7 @@ def find_best_move(board, player, turn):
     for i in range(9):
         if board[i] == 0:
             board[i] = player
-            score = minmax(board, turn, -player)
+            score = minimax(board, turn, -player)
             board[i] = 0
 
             if player == 1 and score > best_score:
